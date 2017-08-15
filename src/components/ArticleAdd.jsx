@@ -16,6 +16,7 @@ class ArticleAdd extends Component {
   constructor(props) {
     super(props)
     this.state = { data: {}, error: {} }
+    this.addArticle = this.addArticle.bind(this)
   }
 
   requestParse(url) {
@@ -27,18 +28,24 @@ class ArticleAdd extends Component {
       .catch(error => this.setState({ error }))
   }
 
-  render() {
-    const { data, error } = this.state
+  addArticle() {
     const article = {
       date_added: moment().format('YYYY-MM-DD'),
-      snippet: _.omit(data, pathsToOmit)
+      snippet: _.omit(this.state.data, pathsToOmit)
     }
+
+    this.props.onAdd(article)
+    this.setState({ data: {}, error: {} })
+  }
+
+  render() {
+    const { data, error } = this.state
 
     return (
       <section>
         <Input
           onChange={_.debounce(url => url && this.requestParse(url), 250)}
-          onEnter={() => data.url && this.props.onAdd(article)}
+          onEnter={this.addArticle}
         />
         {error.message || (data.url && <Article {...data} />)}
       </section>

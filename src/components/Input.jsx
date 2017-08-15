@@ -21,6 +21,7 @@ class Input extends Component {
 
   handleEnter() {
     this.props.onEnter()
+    this.setState({ value: '' })
   }
 
   render() {
