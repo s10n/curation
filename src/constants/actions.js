@@ -1,6 +1,7 @@
 import keyMirror from 'keymirror'
 
 export default keyMirror({
-  FETCH_ARTICLES: null,
+  ADD_BOARD: null,
+  ADD_LIST: null,
   ADD_ARTICLE: null
 })
