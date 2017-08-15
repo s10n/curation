@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import Article from './Article'
 
 const propTypes = {
-  articles: PropTypes.object.isRequired
+  articles: PropTypes.array.isRequired
 }
 
 const Articles = ({ articles }) =>
   <ul>
-    {Object.keys(articles).map(key =>
-      <li key={key}>
-        <Article {...articles[key].snippet} />
+    {articles.map(article =>
+      <li key={article.key}>
+        <Article {...article.snippet} />
       </li>
     )}
   </ul>

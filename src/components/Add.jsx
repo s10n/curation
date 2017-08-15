@@ -4,20 +4,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import api from '../config/api'
-import { pathsToOmit, slugify } from '../helpers/data'
+import { pathsToOmit } from '../helpers/data'
+import { slugify } from '../helpers/utils'
 import Input from './Input'
 import Article from './Article'
 
 const propTypes = {
+  board: PropTypes.object.isRequired,
   onAddList: PropTypes.func.isRequired,
   onAddArticle: PropTypes.func.isRequired
 }
 
 const initialState = {
   value: '',
-  title: '',
-  slug: '',
-  level: -1,
+  list: { title: '', slug: '', level: -1 },
   data: {},
   error: {},
   isFetching: false
@@ -39,8 +39,9 @@ class Add extends Component {
   }
 
   handleEnter() {
-    const { title, level, data } = this.state
-    title && this.addList({ title, level })
+    const { board } = this.props
+    const { list, data } = this.state
+    list.title && this.addList({ ...list, board: board.key })
     data.url && this.addArticle(data)
   }
 
@@ -52,7 +53,7 @@ class Add extends Component {
     const title = isList ? string.slice(level).trim() : ''
     const slug = slugify(title)
 
-    this.setState({ title, slug, level })
+    this.setState({ list: { title, slug, level } })
   }
 
   requestParse(url) {
@@ -75,7 +76,9 @@ class Add extends Component {
   }
 
   addArticle(data) {
+    const { board } = this.props
     const article = {
+      board: board.key,
       date_added: moment().format('YYYY-MM-DD'),
       snippet: _.omit(data, pathsToOmit)
     }
@@ -84,17 +87,19 @@ class Add extends Component {
   }
 
   render() {
-    const { value, title, level, data, error, isFetching } = this.state
+    const { value, list, data, error, isFetching } = this.state
     const headings = { 2: 'h2', 3: 'h3' }
-    const Heading = headings[level]
+    const Heading = headings[list.level]
 
     return (
       <section>
         <Input value={value} onChange={this.handleChange} onEnter={this.handleEnter} />
-        {title &&
+
+        {list.title &&
           <Heading>
-            {title}
+            {list.title}
           </Heading>}
+
         {isFetching ? '...' : error.message || (data.url && <Article {...data} />)}
       </section>
     )

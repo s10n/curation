@@ -6,12 +6,3 @@ export const pathsToOmit = [
   'rendered_pages',
   'next_page_url'
 ]
-
-export const slugify = string =>
-  string
-    .trim()
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/:|\/|\?|#|\[|\]|@|!|\$|&|'|\(|\)|\*|\+|,|;|=|%|\./g, '-')
-    .replace(/--+/g, '-')
