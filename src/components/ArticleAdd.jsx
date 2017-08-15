@@ -15,7 +15,7 @@ const propTypes = {
 class ArticleAdd extends Component {
   constructor(props) {
     super(props)
-    this.state = { url: '', data: {}, error: {} }
+    this.state = { url: '', data: {}, error: {}, isFetching: false }
     this.handleChange = this.handleChange.bind(this)
     this.handleEnter = this.handleEnter.bind(this)
     this.requestParse = _.debounce(this.requestParse, 250)
@@ -23,7 +23,7 @@ class ArticleAdd extends Component {
 
   handleChange(url) {
     this.setState({ url })
-    url && this.requestParse(url)
+    url && this.setState({ isFetching: true }, () => this.requestParse(url))
   }
 
   handleEnter() {
@@ -36,8 +36,14 @@ class ArticleAdd extends Component {
 
     axios
       .get(api.url + url, { headers })
-      .then(({ data }) => this.setState({ data, error: {} }))
-      .catch(error => this.setState({ error }))
+      .then(({ data }) =>
+        this.setState(
+          data.error
+            ? { error: { message: data.messages }, isFetching: false }
+            : { data, error: {}, isFetching: false }
+        )
+      )
+      .catch(error => this.setState({ error, isFetching: false }))
   }
 
   addArticle(data) {
@@ -50,12 +56,12 @@ class ArticleAdd extends Component {
   }
 
   render() {
-    const { url, data, error } = this.state
+    const { url, data, error, isFetching } = this.state
 
     return (
       <section>
         <Input value={url} onChange={this.handleChange} onEnter={this.handleEnter} />
-        {error.message || (data.url && <Article {...data} />)}
+        {isFetching ? '...' : error.message || (data.url && <Article {...data} />)}
       </section>
     )
   }
