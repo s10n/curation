@@ -13,15 +13,15 @@ const defaultProps = {
 
 const Article = ({ url, title, excerpt }) =>
   <article>
-    <h1>
+    <h1 style={{ display: 'inline', fontSize: '1rem' }}>
       <a href={url} target="_blank">
         {title}
       </a>
     </h1>
 
     {excerpt &&
-      <p>
-        {excerpt}
+      <p style={{ display: 'inline' }}>
+        {': ' + excerpt}
       </p>}
   </article>
 

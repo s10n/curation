@@ -1,8 +1,10 @@
 import _ from 'lodash'
+import moment from 'moment'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import api from '../config/api'
+import { pathsToOmit } from '../helpers/data'
 import Input from './Input'
 import Article from './Article'
 
@@ -13,7 +15,20 @@ const propTypes = {
 class ArticleAdd extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: {}, error: {} }
+    this.state = { url: '', data: {}, error: {} }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleEnter = this.handleEnter.bind(this)
+    this.requestParse = _.debounce(this.requestParse, 250)
+  }
+
+  handleChange(url) {
+    this.setState({ url })
+    url && this.requestParse(url)
+  }
+
+  handleEnter() {
+    const { data } = this.state
+    data.url && this.addArticle(data)
   }
 
   requestParse(url) {
@@ -25,15 +40,21 @@ class ArticleAdd extends Component {
       .catch(error => this.setState({ error }))
   }
 
+  addArticle(data) {
+    const article = {
+      date_added: moment().format('YYYY-MM-DD'),
+      snippet: _.omit(data, pathsToOmit)
+    }
+
+    this.props.onAdd(article) && this.setState({ url: '', data: {}, error: {} })
+  }
+
   render() {
-    const { data, error } = this.state
+    const { url, data, error } = this.state
 
     return (
       <section>
-        <Input
-          onChange={_.debounce(url => url && this.requestParse(url), 250)}
-          onEnter={() => data.url && this.props.onAdd(data)}
-        />
+        <Input value={url} onChange={this.handleChange} onEnter={this.handleEnter} />
         {error.message || (data.url && <Article {...data} />)}
       </section>
     )

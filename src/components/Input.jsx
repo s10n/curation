@@ -1,39 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const propTypes = {
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired
 }
 
-class Input extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { value: '' }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleEnter = this.handleEnter.bind(this)
-  }
-
-  handleChange(value) {
-    this.setState({ value })
-    this.props.onChange(value)
-  }
-
-  handleEnter() {
-    this.props.onEnter()
-  }
-
-  render() {
-    return (
-      <input
-        value={this.state.value}
-        onChange={event => this.handleChange(event.target.value)}
-        onKeyPress={event => event.key === 'Enter' && this.handleEnter()}
-      />
-    )
-  }
+const defaultProps = {
+  value: ''
 }
 
+const Input = ({ value, onChange, onEnter }) =>
+  <input
+    value={value}
+    onChange={event => onChange(event.target.value)}
+    onKeyPress={event => event.key === 'Enter' && onEnter()}
+  />
+
 Input.propTypes = propTypes
+Input.defaultProps = defaultProps
 
 export default Input
