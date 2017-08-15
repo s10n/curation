@@ -15,8 +15,20 @@ const propTypes = {
 class ArticleAdd extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: {}, error: {} }
-    this.addArticle = this.addArticle.bind(this)
+    this.state = { url: '', data: {}, error: {} }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleEnter = this.handleEnter.bind(this)
+    this.requestParse = _.debounce(this.requestParse, 250)
+  }
+
+  handleChange(url) {
+    this.setState({ url })
+    url && this.requestParse(url)
+  }
+
+  handleEnter() {
+    const { data } = this.state
+    data.url && this.addArticle(data)
   }
 
   requestParse(url) {
@@ -28,25 +40,21 @@ class ArticleAdd extends Component {
       .catch(error => this.setState({ error }))
   }
 
-  addArticle() {
+  addArticle(data) {
     const article = {
       date_added: moment().format('YYYY-MM-DD'),
-      snippet: _.omit(this.state.data, pathsToOmit)
+      snippet: _.omit(data, pathsToOmit)
     }
 
-    this.props.onAdd(article)
-    this.setState({ data: {}, error: {} })
+    this.props.onAdd(article) && this.setState({ url: '', data: {}, error: {} })
   }
 
   render() {
-    const { data, error } = this.state
+    const { url, data, error } = this.state
 
     return (
       <section>
-        <Input
-          onChange={_.debounce(url => url && this.requestParse(url), 250)}
-          onEnter={this.addArticle}
-        />
+        <Input value={url} onChange={this.handleChange} onEnter={this.handleEnter} />
         {error.message || (data.url && <Article {...data} />)}
       </section>
     )
