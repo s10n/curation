@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import * as listActions from '../actions/list'
 import * as articleActions from '../actions/article'
 import { setStorage } from '../helpers/data'
 import Header from '../components/Header'
 import Articles from '../components/Articles'
-import ArticleAdd from '../components/ArticleAdd'
+import Add from '../components/Add'
 
 const propTypes = {
   articles: PropTypes.object.isRequired,
+  getLists: PropTypes.func.isRequired,
+  addList: PropTypes.func.isRequired,
   getArticles: PropTypes.func.isRequired,
   addArticle: PropTypes.func.isRequired
 }
@@ -17,6 +20,7 @@ const propTypes = {
 class App extends Component {
   componentWillMount() {
     this.props.getArticles()
+    this.props.getLists()
   }
 
   componentDidUpdate(prevProps) {
@@ -24,13 +28,13 @@ class App extends Component {
   }
 
   render() {
-    const { articles, addArticle } = this.props
+    const { articles, addList, addArticle } = this.props
 
     return (
       <main>
         <Header />
         <Articles articles={articles} />
-        <ArticleAdd onAdd={addArticle} />
+        <Add onAddList={addList} onAddArticle={addArticle} />
       </main>
     )
   }
@@ -38,7 +42,8 @@ class App extends Component {
 
 App.propTypes = propTypes
 
-const mapStateToProps = ({ articles }) => ({ articles })
-const mapDispatchToProps = dispatch => bindActionCreators(articleActions, dispatch)
+const mapStateToProps = ({ lists, articles }) => ({ lists, articles })
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...listActions, ...articleActions }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
