@@ -17,7 +17,7 @@ const Sidebar = ({ boards, variant, onAddBoard }) =>
   <aside style={variant}>
     <nav>
       {Object.keys(boards).map(key =>
-        <Link to={'/' + boards[key].slug} style={{ display: 'block' }} key={key}>
+        <Link to={'/anonymous/' + boards[key].slug} style={{ display: 'block' }} key={key}>
           {boards[key].title}
         </Link>
       )}
