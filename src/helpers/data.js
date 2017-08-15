@@ -17,3 +17,12 @@ export const setStorage = (prev, next) => {
   const articles = JSON.stringify(next.articles)
   JSON.stringify(prev.articles) !== articles && localStorage.setItem('articles', articles)
 }
+
+export const slugify = string =>
+  string
+    .trim()
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/:|\/|\?|#|\[|\]|@|!|\$|&|'|\(|\)|\*|\+|,|;|=|%|\./g, '-')
+    .replace(/--+/g, '-')

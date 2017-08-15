@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import api from '../config/api'
-import { pathsToOmit } from '../helpers/data'
+import { pathsToOmit, slugify } from '../helpers/data'
 import Input from './Input'
 import Article from './Article'
 
@@ -13,7 +13,15 @@ const propTypes = {
   onAddArticle: PropTypes.func.isRequired
 }
 
-const initialState = { value: '', title: '', level: 0, data: {}, error: {}, isFetching: false }
+const initialState = {
+  value: '',
+  title: '',
+  slug: '',
+  level: -1,
+  data: {},
+  error: {},
+  isFetching: false
+}
 
 class Add extends Component {
   constructor(props) {
@@ -40,12 +48,11 @@ class Add extends Component {
     const SPACE = ' '
     const HEADINGS = ['##', '###']
     const level = string.indexOf(SPACE)
+    const isList = level > 0 && HEADINGS.includes(string.slice(0, level))
+    const title = isList ? string.slice(level).trim() : ''
+    const slug = slugify(title)
 
-    this.setState(
-      level > 0 && HEADINGS.includes(string.slice(0, level))
-        ? { title: string.slice(level).trim(), level }
-        : { title: '', level: 0 }
-    )
+    this.setState({ title, slug, level })
   }
 
   requestParse(url) {
