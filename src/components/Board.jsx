@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Lists from './Lists'
-import Articles from './Articles'
 import ListAdd from '../containers/ListAdd'
 
 const propTypes = {
@@ -11,11 +10,13 @@ const propTypes = {
 }
 
 const Board = ({ board, lists, articles }) =>
-  <main>
-    <Lists lists={lists} />
-    <Articles articles={articles} />
+  <article>
+    <h1>
+      {board.title}
+    </h1>
+    <Lists lists={lists} articles={articles} board={board} />
     <ListAdd board={board} />
-  </main>
+  </article>
 
 Board.propTypes = propTypes
 

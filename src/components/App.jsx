@@ -10,9 +10,9 @@ const App = () =>
       <Header />
       <div style={{ display: 'flex' }}>
         <Sidebar variant={{ flex: 'none' }} />
-        <div style={{ flex: 1 }}>
+        <main style={{ flex: 1 }}>
           <Route exact path="/:user/:board" component={Board} />
-        </div>
+        </main>
       </div>
     </div>
   </Router>
