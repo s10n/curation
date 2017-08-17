@@ -3,17 +3,20 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
   value: PropTypes.string,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired
 }
 
 const defaultProps = {
-  value: ''
+  value: '',
+  placeholder: ''
 }
 
-const Input = ({ value, onChange, onEnter }) =>
+const Input = ({ value, placeholder, onChange, onEnter }) =>
   <input
     value={value}
+    placeholder={placeholder}
     onChange={event => onChange(event.target.value)}
     onKeyPress={event => event.key === 'Enter' && onEnter()}
   />
