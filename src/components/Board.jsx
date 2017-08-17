@@ -1,21 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Lists from './Lists'
-import Articles from '../components/Articles'
-import ListAdd from '../components/ListAdd'
+import Articles from './Articles'
+import ListAdd from '../containers/ListAdd'
 
 const propTypes = {
   board: PropTypes.object.isRequired,
   lists: PropTypes.array.isRequired,
-  articles: PropTypes.array.isRequired,
-  addList: PropTypes.func.isRequired
+  articles: PropTypes.array.isRequired
 }
 
-const Board = ({ board, lists, articles, addList }) =>
+const Board = ({ board, lists, articles }) =>
   <main>
     <Lists lists={lists} />
     <Articles articles={articles} />
-    <ListAdd onAddList={addList} board={board} />
+    <ListAdd board={board} />
   </main>
 
 Board.propTypes = propTypes

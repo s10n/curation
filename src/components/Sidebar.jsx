@@ -1,19 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import BoardAdd from './BoardAdd'
+import BoardAdd from '../containers/BoardAdd'
 
 const propTypes = {
   boards: PropTypes.array.isRequired,
-  variant: PropTypes.object,
-  addBoard: PropTypes.func.isRequired
+  variant: PropTypes.object
 }
 
 const defaultProps = {
   variant: {}
 }
 
-const Sidebar = ({ boards, variant, addBoard }) =>
+const Sidebar = ({ boards, variant }) =>
   <aside style={variant}>
     <nav>
       {boards.map(board =>
@@ -23,7 +22,7 @@ const Sidebar = ({ boards, variant, addBoard }) =>
       )}
     </nav>
 
-    <BoardAdd boards={boards} onAddBoard={addBoard} />
+    <BoardAdd boards={boards} />
   </aside>
 
 Sidebar.propTypes = propTypes

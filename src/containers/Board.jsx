@@ -1,8 +1,5 @@
 import _ from 'lodash'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as listActions from '../actions/list'
-import * as articleActions from '../actions/article'
 import Board from '../components/Board'
 
 const mapStateToProps = ({ boards, lists, articles }, ownProps) => {
@@ -15,7 +12,4 @@ const mapStateToProps = ({ boards, lists, articles }, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...listActions, ...articleActions }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Board)
+export default connect(mapStateToProps)(Board)
