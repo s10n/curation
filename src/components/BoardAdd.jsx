@@ -16,7 +16,12 @@ const defaultProps = {
 
 const BoardAdd = ({ title, error, onChange, onEnter }) =>
   <section>
-    <Input value={title} onChange={onChange} onEnter={onEnter} />
+    <Input
+      value={title}
+      variant={{ padding: '.5rem 1rem' }}
+      onChange={onChange}
+      onEnter={onEnter}
+    />
 
     {error &&
       <p>
