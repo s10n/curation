@@ -11,7 +11,7 @@ const propTypes = {
 
 const List = ({ list, articles, board }) =>
   <article>
-    <h2>
+    <h2 style={{ borderBottom: '1px solid hsl(0, 0%, 93%)', marginBottom: '1rem' }}>
       {list.title}
     </h2>
 
