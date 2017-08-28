@@ -11,7 +11,7 @@ const propTypes = {
 
 const Board = ({ board, lists, articles }) =>
   <article>
-    <h1>
+    <h1 style={{ marginBottom: '1em' }}>
       {board.title}
     </h1>
     <Lists lists={lists} articles={articles} board={board} />

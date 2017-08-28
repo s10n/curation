@@ -4,28 +4,24 @@ import { Link } from 'react-router-dom'
 import BoardAdd from '../containers/BoardAdd'
 
 const propTypes = {
-  boards: PropTypes.array.isRequired,
-  variant: PropTypes.object
+  boards: PropTypes.array.isRequired
 }
 
-const defaultProps = {
-  variant: {}
-}
-
-const Sidebar = ({ boards, variant }) =>
-  <aside style={variant}>
-    <nav>
-      {boards.map(board =>
-        <Link to={'/anonymous/' + board.slug} style={{ display: 'block' }} key={board.key}>
-          {board.title}
-        </Link>
-      )}
-    </nav>
+const Sidebar = ({ boards }) =>
+  <nav>
+    {boards.map(board =>
+      <Link to={'/anonymous/' + board.slug} style={style.Link} key={board.key}>
+        {board.title}
+      </Link>
+    )}
 
     <BoardAdd boards={boards} />
-  </aside>
+  </nav>
 
 Sidebar.propTypes = propTypes
-Sidebar.defaultProps = defaultProps
+
+const style = {
+  Link: { color: 'black', display: 'block', padding: '.5rem 1rem' }
+}
 
 export default Sidebar

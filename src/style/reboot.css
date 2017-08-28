@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  line-height: 1.15;
+  line-height: 1;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -13,6 +13,7 @@ html {
 }
 
 body {
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -23,8 +24,20 @@ h4,
 h5,
 h6 {
   font-weight: 600;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
 }
 
 p,
@@ -45,8 +58,13 @@ a {
 
 button,
 input {
+  border: 0;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   margin: 0;
+}
+
+:focus {
+  outline: 0;
 }

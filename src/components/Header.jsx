@@ -12,8 +12,8 @@ const defaultProps = {
 
 const Header = ({ children }) =>
   <header>
-    <h1>
-      <Link to="/" style={{ color: 'black' }}>
+    <h1 style={{ fontSize: '1rem' }}>
+      <Link to="/" style={style.Link}>
         {children}
       </Link>
     </h1>
@@ -21,5 +21,9 @@ const Header = ({ children }) =>
 
 Header.propTypes = propTypes
 Header.defaultProps = defaultProps
+
+const style = {
+  Link: { color: 'black', display: 'block', padding: '.5rem 1rem' }
+}
 
 export default Header
