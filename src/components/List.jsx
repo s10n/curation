@@ -9,16 +9,19 @@ const propTypes = {
   board: PropTypes.object.isRequired
 }
 
-const List = ({ list, articles, board }) =>
+const List = ({ list, articles, board }) => (
   <article>
-    <h2 style={{ borderBottom: '1px solid hsl(0, 0%, 93%)', marginBottom: '1rem' }}>
-      {list.title}
-    </h2>
+    <h2 style={style.title}>{list.title}</h2>
 
     <Articles articles={articles} />
     <ArticleAdd board={board} list={list} />
   </article>
+)
 
 List.propTypes = propTypes
+
+const style = {
+  title: { borderBottom: '1px solid hsl(0, 0%, 93%)', marginBottom: '1rem' }
+}
 
 export default List

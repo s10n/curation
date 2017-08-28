@@ -27,7 +27,8 @@ class ArticleAddContainer extends Component {
 
   handleChange(url) {
     this.setState({ url })
-    url.startsWith('http') && this.setState({ isFetching: true }, () => this.requestParse(url))
+    url.startsWith('http') &&
+      this.setState({ isFetching: true }, () => this.requestParse(url))
   }
 
   handleEnter() {
@@ -78,6 +79,7 @@ class ArticleAddContainer extends Component {
 
 ArticleAddContainer.propTypes = propTypes
 
-const mapDispatchToProps = dispatch => bindActionCreators(articleActions, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(articleActions, dispatch)
 
 export default connect(null, mapDispatchToProps)(ArticleAddContainer)

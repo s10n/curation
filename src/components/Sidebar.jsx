@@ -7,16 +7,17 @@ const propTypes = {
   boards: PropTypes.array.isRequired
 }
 
-const Sidebar = ({ boards }) =>
+const Sidebar = ({ boards }) => (
   <nav>
-    {boards.map(board =>
+    {boards.map(board => (
       <Link to={'/anonymous/' + board.slug} style={style.Link} key={board.key}>
         {board.title}
       </Link>
-    )}
+    ))}
 
     <BoardAdd boards={boards} />
   </nav>
+)
 
 Sidebar.propTypes = propTypes
 

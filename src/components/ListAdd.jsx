@@ -12,15 +12,13 @@ const defaultProps = {
   title: ''
 }
 
-const ListAdd = ({ title, onChange, onEnter }) =>
+const ListAdd = ({ title, onChange, onEnter }) => (
   <section>
     <Input value={title} onChange={onChange} onEnter={onEnter} />
 
-    {title &&
-      <h2>
-        {title}
-      </h2>}
+    {title && <h2>{title}</h2>}
   </section>
+)
 
 ListAdd.propTypes = propTypes
 ListAdd.defaultProps = defaultProps

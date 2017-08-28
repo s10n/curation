@@ -17,7 +17,7 @@ const defaultProps = {
   variant: {}
 }
 
-const Input = ({ type, value, placeholder, variant, onChange, onEnter }) =>
+const Input = ({ type, value, placeholder, variant, onChange, onEnter }) => (
   <input
     type={type}
     value={value}
@@ -26,6 +26,7 @@ const Input = ({ type, value, placeholder, variant, onChange, onEnter }) =>
     onChange={event => onChange(event.target.value)}
     onKeyPress={event => event.key === 'Enter' && onEnter()}
   />
+)
 
 Input.propTypes = propTypes
 Input.defaultProps = defaultProps

@@ -17,7 +17,7 @@
   "devDependencies": {
     "husky": "^0.14.3",
     "lint-staged": "^4.0.3",
-    "prettier": "^1.5.3"
+    "prettier": "^1.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +28,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --no-semi --print-width 100 --write",
+      "prettier --single-quote --no-semi --write",
       "git add"
     ]
   }

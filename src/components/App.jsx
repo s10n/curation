@@ -4,7 +4,7 @@ import Header from './Header'
 import Sidebar from '../containers/Sidebar'
 import Board from '../containers/Board'
 
-const App = () =>
+const App = () => (
   <Router>
     <div style={{ display: 'flex', height: '-webkit-fill-available' }}>
       <aside style={{ flex: 'none', ...style.aside }}>
@@ -17,9 +17,13 @@ const App = () =>
       </main>
     </div>
   </Router>
+)
 
 const style = {
-  aside: { backgroundColor: 'hsl(0, 0%, 98%)', borderRight: '1px solid hsl(0, 0%, 93%)' }
+  aside: {
+    backgroundColor: 'hsl(0, 0%, 98%)',
+    borderRight: '1px solid hsl(0, 0%, 93%)'
+  }
 }
 
 export default App

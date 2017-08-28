@@ -10,7 +10,7 @@ const defaultProps = {
   children: 'Curation'
 }
 
-const Header = ({ children }) =>
+const Header = ({ children }) => (
   <header>
     <h1 style={{ fontSize: '1rem' }}>
       <Link to="/" style={style.Link}>
@@ -18,6 +18,7 @@ const Header = ({ children }) =>
       </Link>
     </h1>
   </header>
+)
 
 Header.propTypes = propTypes
 Header.defaultProps = defaultProps

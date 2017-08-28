@@ -9,17 +9,18 @@ const propTypes = {
   board: PropTypes.object.isRequired
 }
 
-const Lists = ({ lists, articles, board }) =>
+const Lists = ({ lists, articles, board }) => (
   <section>
-    {lists.map(list =>
+    {lists.map(list => (
       <List
         list={list}
         articles={_.filter(articles, ['list', list.key])}
         board={board}
         key={list.key}
       />
-    )}
+    ))}
   </section>
+)
 
 Lists.propTypes = propTypes
 

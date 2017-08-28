@@ -11,7 +11,7 @@ const defaultProps = {
   excerpt: ''
 }
 
-const Article = ({ url, title, excerpt }) =>
+const Article = ({ url, title, excerpt }) => (
   <article>
     <h1 style={{ display: 'inline', fontSize: '1rem' }}>
       <a href={url} target="_blank">
@@ -19,11 +19,9 @@ const Article = ({ url, title, excerpt }) =>
       </a>
     </h1>
 
-    {excerpt &&
-      <p style={{ display: 'inline' }}>
-        {': ' + excerpt}
-      </p>}
+    {excerpt && <p style={{ display: 'inline' }}>{': ' + excerpt}</p>}
   </article>
+)
 
 Article.propTypes = propTypes
 Article.defaultProps = defaultProps

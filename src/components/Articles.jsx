@@ -6,14 +6,15 @@ const propTypes = {
   articles: PropTypes.array.isRequired
 }
 
-const Articles = ({ articles }) =>
+const Articles = ({ articles }) => (
   <ul>
-    {articles.map(article =>
+    {articles.map(article => (
       <li key={article.key}>
         <Article {...article.snippet} />
       </li>
-    )}
+    ))}
   </ul>
+)
 
 Articles.propTypes = propTypes
 

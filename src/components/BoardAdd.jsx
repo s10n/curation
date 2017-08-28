@@ -14,7 +14,7 @@ const defaultProps = {
   error: ''
 }
 
-const BoardAdd = ({ title, error, onChange, onEnter }) =>
+const BoardAdd = ({ title, error, onChange, onEnter }) => (
   <section>
     <Input
       value={title}
@@ -23,11 +23,9 @@ const BoardAdd = ({ title, error, onChange, onEnter }) =>
       onEnter={onEnter}
     />
 
-    {error &&
-      <p>
-        {error}
-      </p>}
+    {error && <p>{error}</p>}
   </section>
+)
 
 BoardAdd.propTypes = propTypes
 BoardAdd.defaultProps = defaultProps

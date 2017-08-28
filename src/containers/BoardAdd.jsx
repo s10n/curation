@@ -23,7 +23,8 @@ class BoardAddContainer extends Component {
   handleChange(title) {
     const { boards } = this.props
     const slug = slugify(title)
-    const error = _.findIndex(boards, ['slug', slug]) !== -1 ? 'Board already exists' : ''
+    const error =
+      _.findIndex(boards, ['slug', slug]) !== -1 ? 'Board already exists' : ''
 
     this.setState({ title, slug, error })
   }
@@ -54,6 +55,7 @@ class BoardAddContainer extends Component {
 
 BoardAddContainer.propTypes = propTypes
 
-const mapDispatchToProps = dispatch => bindActionCreators(boardActions, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(boardActions, dispatch)
 
 export default connect(null, mapDispatchToProps)(BoardAddContainer)

@@ -38,12 +38,19 @@ class ListAddContainer extends Component {
   render() {
     const { title } = this.state
 
-    return <ListAdd title={title} onChange={this.handleChange} onEnter={this.handleEnter} />
+    return (
+      <ListAdd
+        title={title}
+        onChange={this.handleChange}
+        onEnter={this.handleEnter}
+      />
+    )
   }
 }
 
 ListAddContainer.propTypes = propTypes
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...listActions }, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...listActions }, dispatch)
 
 export default connect(null, mapDispatchToProps)(ListAddContainer)

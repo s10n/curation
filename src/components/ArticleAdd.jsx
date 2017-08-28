@@ -17,11 +17,12 @@ const defaultProps = {
   error: ''
 }
 
-const ArticleAdd = ({ url, article, error, onChange, onEnter }) =>
+const ArticleAdd = ({ url, article, error, onChange, onEnter }) => (
   <section>
     <Input value={url} onChange={onChange} onEnter={onEnter} />
     {error || (article.url && <Article {...article} />)}
   </section>
+)
 
 ArticleAdd.propTypes = propTypes
 ArticleAdd.defaultProps = defaultProps
